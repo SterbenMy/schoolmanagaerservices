@@ -1,0 +1,89 @@
+version: "3.1"
+services:
+  #service 1: mysql db
+  db:
+    image: mysql
+    container_name: mysql-db2
+    restart: always
+    environment:
+      MYSQL_DATABASE: project
+      MYSQL_ROOT_PASSWORD: 26264605050
+    ports:
+      - "3307:3306"
+    volumes:
+      - E:/Aplicatia/MySQLData/mysql-db2:/var/lib/mysql
+
+  #service 2: definition of phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: my-php-myadmin
+    ports:
+      - "8085:80"
+    restart: always
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 26264605050
+
+  #service 3: Spring-Boot application first service (courses)
+  coursesmanager:
+    image: coursesmanager
+    container_name: coursesmanager
+    build:
+      context: ../managerCourses/CoursesManager
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8080"
+    restart: always
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db2:3306/project?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 26264605050
+      
+    #service 3: Spring-Boot application second service  (students)
+  studentsmanager:
+    image: studentsmanager
+    container_name: studentsmanager
+    build:
+      context: ../managerStudents/managerStudents
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    restart: always
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db2:3306/project?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 26264605050
+      
+    #service 3: Spring-Boot application third service (teacher)
+  teachersmanager:
+    image: teachersmanager
+    container_name: teachersmanager
+    build:
+      context: ../managerTeachers/managerTeachers
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    restart: always
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db2:3306/project?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 26264605050
+      
+    #service 4: Spring-Boot application four service (frontend)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+        - '.:/frontend'
+        - '/frontend/node_modules'
+    ports:
+        - "3000:3000"
