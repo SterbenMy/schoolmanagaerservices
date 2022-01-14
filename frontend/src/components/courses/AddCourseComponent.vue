@@ -14,7 +14,7 @@
                ref="addCourseForm"
       >
         <el-form-item label="Number:" prop="number">
-          <el-input v-model="addCourseForm.number"></el-input>
+          <el-input v-model="addCourseForm.number" v-validate="'numeric'"></el-input>
         </el-form-item>
         <el-form-item label="Name:" prop="name">
           <el-input  v-model="addCourseForm.name">
@@ -79,15 +79,17 @@ export default {
     },
     createCourse() {
       this.$store
-          .dispatch("create", {
+          .dispatch("createCourse", {
             name: this.addCourseForm.name,
             number: this.addCourseForm.number,
+
           })
           .then(() => {
             this.$notify.success({
               title: "Success",
-              message: "You have been successfully added building",
-            });console.log(this.name,this.number);
+              message: "You have been successfully added course",
+            });
+            this.$router.go().catch(()=>{});
           })
           .catch(() => {
             this.$notify.error({

@@ -7,11 +7,11 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: project
-      MYSQL_ROOT_PASSWORD: 26264605050
+      MYSQL_ROOT_PASSWORD: mySQLpsw.15
     ports:
       - "3307:3306"
     volumes:
-      - E:/Aplicatia/MySQLData/mysql-db2:/var/lib/mysql
+      - C:/Users/Леново/IdeaProjects/schoolmanagaerservices/MySQLData/mysql-db2:/var/lib/mysql
 
   #service 2: definition of phpMyAdmin
   phpmyadmin:
@@ -24,7 +24,7 @@ services:
       - db
     environment:
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 26264605050
+      SPRING_DATASOURCE_PASSWORD: mySQLpsw.15
 
   #service 3: Spring-Boot application first service (courses)
   coursesmanager:
@@ -41,7 +41,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db2:3306/project?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 26264605050
+      SPRING_DATASOURCE_PASSWORD: mySQLpsw.15
       
     #service 3: Spring-Boot application second service  (students)
   studentsmanager:
@@ -58,7 +58,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db2:3306/project?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 26264605050
+      SPRING_DATASOURCE_PASSWORD: mySQLpsw.15
       
     #service 3: Spring-Boot application third service (teacher)
   teachersmanager:
@@ -75,7 +75,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db2:3306/project?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 26264605050
+      SPRING_DATASOURCE_PASSWORD: mySQLpsw.15
       
     #service 4: Spring-Boot application four service (frontend)
   frontend:

@@ -1,6 +1,5 @@
 <template>
-  <el-button class="button-trash" @click="handleDelete(studentId)">
-    <i class="icon-trash-2"></i>
+  <el-button  type="primary" icon="el-icon-delete" circle  @click="handleDelete(studentId)">
   </el-button>
 </template>
 
@@ -21,18 +20,20 @@ export default {
         customClass: "delete-message-box",
       })
           .then(() => {
-            this.$store.dispatch("delete", id);
+            this.$store.dispatch("deleteStudent", id);
+            this.$router.go().catch(()=>{});
           })
           .catch(() => {
             return 0;
           });
+
     },
   },
 }
 </script>
 
 <style scoped lang="scss">
-.button-trash {
+.el-button {
   margin-left: 0.625rem;
 }
 </style>

@@ -1,12 +1,7 @@
 <template>
   <div class="students-list">
-    <div class="row-title-teacher">
+    <div class="row-title-student">
       <span>Students</span>
-    </div>
-    <div>
-      <add-student-component>
-        <el-button>Add student</el-button>
-      </add-student-component>
     </div>
     <div style="width: 100%">
       <el-table :data="students">
@@ -50,12 +45,15 @@
             >
               <el-button type="primary" icon="el-icon-edit" circle></el-button>
             </router-link>
-            <delete-student-component
-                :student-id="scope.row.id"
-            ><el-button type="danger" icon="el-icon-delete" circle></el-button></delete-student-component>
+            <delete-student-component :student-id="scope.row.id">
+
+            ></delete-student-component>
           </template>
         </el-table-column>
       </el-table>
+    </div>
+    <div>
+      <add-student-component></add-student-component>
     </div>
   </div>
 </template>
@@ -75,19 +73,13 @@ export default {
   },
 
   methods: {
-    async getList() {
-      await this.$store.dispatch("getList");
+    async getStudentList() {
+      await this.$store.dispatch("getStudentsList");
       this.students = await this.$store.getters.getStudentsList;
-    },
-    handleEdit(index, row) {
-      console.log(index, row);
-    },
-    handleDelete(index, row) {
-      console.log(index, row);
     },
   },
   mounted() {
-    this.getList();
+    this.getStudentList();
   },
 }
 
@@ -100,7 +92,7 @@ export default {
   justify-content: center;
   padding: 2rem 5rem;
 
-  .row-title-teacher {
+  .row-title-student {
     padding: 5rem;
     width: 100%;
 

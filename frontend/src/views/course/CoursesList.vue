@@ -13,14 +13,17 @@
             <span>Students: {{ course.students.length }} </span>
           </div>
           <div class="buttons-group">
-            <el-button>Edit</el-button>
+            <router-link
+                :to="{ name: 'EditCourseComponent', params: { id: course.id } }"
+            >
+              <el-button>Edit</el-button>
+            </router-link>
             <delete-course-component :course-id="course.id"></delete-course-component>
           </div>
         </el-card>
       </div>
     </div>
     <div class="add-button">
-      <!--      <el-button>Add new course</el-button>-->
       <add-course-component></add-course-component>
     </div>
   </div>
@@ -39,14 +42,14 @@ export default {
       courses: [],
     };
   },
-  methods:{
-    async getList() {
+  methods: {
+    async getCoursesList() {
       await this.$store.dispatch("getCoursesList");
-      this.courses = await this.$store.getters.getList;
+      this.courses = await this.$store.getters.getCoursesList;
     },
   },
   mounted() {
-    this.getList();
+    this.getCoursesList();
   },
 }
 </script>

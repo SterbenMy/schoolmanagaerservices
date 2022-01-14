@@ -21,7 +21,8 @@ export default {
         customClass: "delete-message-box",
       })
           .then(() => {
-            this.$store.dispatch("delete", id);
+            this.$store.dispatch("deleteCourse", id);
+            this.$router.go().catch(()=>{});
           })
           .catch(() => {
             return 0;
