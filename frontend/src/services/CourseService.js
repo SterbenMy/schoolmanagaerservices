@@ -1,11 +1,11 @@
-import httpClient from "@/services/httpClient";
+import httpClientC from "@/services/httpClientC";
 
 const create = (name, number) =>
-    httpClient.post("/courses/add", { name, number });
+    httpClientC.post("/courses/add", { name, number });
 
-const getCourses = () => httpClient.get("/courses");
-const getCourse = (id) => httpClient.get(`/courses/find/${id}`);
-const deleteCourses = (courses) => httpClient.delete(`courses/delete/${courses}`);
-const updateCourse = (id, name, number, teacher, students) => httpClient.put('courses/update',{ id, name, number, teacher, students});
+const getCourses = () => httpClientC.get("/courses");
+const getCourse = (id) => httpClientC.get(`/courses/find/${id}`);
+const deleteCourses = (courses) => httpClientC.delete(`courses/delete/${courses}`);
+const updateCourse = (id, name, number, teacher, students) => httpClientC.put('courses/update', { id, name, number, teacher, students });
 
 export { create, getCourses, deleteCourses, getCourse, updateCourse };

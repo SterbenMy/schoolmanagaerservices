@@ -11,7 +11,8 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - C:/Users/Леново/IdeaProjects/schoolmanagaerservices/MySQLData/mysql-db2:/var/lib/mysql
+ #natasha     - C:/Users/Леново/IdeaProjects/schoolmanagaerservices/MySQLData/mysql-db2:/var/lib/mysql
+        - E:/Aplicatia/MySQLData/mysql-db2:/var/lib/mysql
 
   #service 2: definition of phpMyAdmin
   phpmyadmin:
